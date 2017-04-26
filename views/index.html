@@ -17,6 +17,8 @@
 
     <!-- APPLICATION SCRIPTS -->
     <script src="/scripts/app.js"></script>
+        <script src="/scripts/controllers/AlbumsIndexController.js"></script>
+        <script src="/scripts/controllers/AlbumsShowController.js"></script>
 
   </head>
   <body>
@@ -27,106 +29,8 @@
       </div>
     </div>
 
-    <div class="container" ng-controller="AlbumsIndexController as albumsIndexCtrl">
-      <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+    <div ng-view></div>
 
-          <form class="form-horizontal" ng-submit="albumsIndexCtrl.createAlbum()">
-            <fieldset>
-
-              <!-- Form Name -->
-              <legend>Add New Album</legend>
-
-              <!-- Text input-->
-              <div class="form-group">
-                <label class="col-md-4 control-label">Album Name</label>
-                <div class="col-md-4">
-                <input id="name" ng-model="albumsIndexCtrl.newAlbum.name" type="text" class="form-control input-md" required="">
-                </div>
-              </div>
-
-              <!-- Text input-->
-              <div class="form-group">
-                <label class="col-md-4 control-label">Artist Name</label>
-                <div class="col-md-4">
-                <input ng-model="albumsIndexCtrl.newAlbum.artistName" type="text" class="form-control input-md">
-                </div>
-              </div>
-
-              <!-- Text input-->
-              <div class="form-group">
-                <label class="col-md-4 control-label">Release Date</label>
-                <div class="col-md-4">
-                <input ng-model="albumsIndexCtrl.newAlbum.releaseDate" type="text" class="form-control input-md">
-                </div>
-              </div>
-
-              <!-- Textarea -->
-              <div class="form-group">
-                <label class="col-md-4 control-label">Genres (separated by commas)</label>
-                <div class="col-md-4">
-                  <textarea class="form-control" ng-model="albumsIndexCtrl.newAlbum.genres"></textarea>
-                </div>
-              </div>
-
-
-              <!-- Create Button -->
-              <div class="form-group">
-                <label class="col-md-4 control-label">Save Album</label>
-                <div class="col-md-4">
-                  <button class="btn btn-primary">Save</button>
-                </div>
-              </div>
-
-              <!-- Create Button -->
-
-            </fieldset>
-          </form>
-        </div>
-      </div>
-
-      <p>{{albumsIndexCtrl.newAlbum}}</p>
-
-      <input type="text" class="form-control" ng-model="searchText" placeholder="Search Albums">
-      <div ng-repeat="album in albumsIndexCtrl.albums | orderBy: 'name' | filter: searchText" class="row">
-
-        <div class="col-md-10 col-md-offset-1">
-          <div class="panel panel-default">
-            <div class="panel-body">
-
-            <!-- begin album internal row -->
-              <div class="row">
-                <div class="col-md-3 col-xs-12 thumbnail">
-                  <img src="images/800x800.png" alt="album image">
-                </div>
-
-                <div class="col-md-9 col-xs-12">
-                  <ul ng-hide="editing" class="list-group form-inline">
-                    <li class="list-group-item">
-                      <h4 class="inline-header">Album Name:</h4>
-                      <span>{{album.name}}</span>
-                    </li>
-
-                    <li class="list-group-item">
-                      <h4 class="inline-header">Artist Name:</h4>
-                      <span>{{album.artistName}}</span>
-                    </li>
-                  </ul>
-                    <!-- ng-repeat buttons -->
-                    <button class='btn btn-danger' ng-click="albumsIndexCtrl.deleteAlbum(album)">Delete Album</button>
-                    <button class='btn btn-info' ng-hide="editing" ng-click="editing = true">Edit Album</button>
-                    <button class='btn btn-success' ng-show="editing" ng-click="albumsIndexCtrl.editAlbum(album); editing = false">Save Changes</button>
-
-                    <!-- edit input -->
-                    <input ng-show="editing" ng-model="album.name" type="text" class="form-control input-md">
-                    <input ng-show="editing" ng-model="album.artistName" type="text" class="form-control input-md">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </body>
 
 </html>
