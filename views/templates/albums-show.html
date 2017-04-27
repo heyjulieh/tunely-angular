@@ -30,10 +30,46 @@
                     <li class="list-group-item">
                       <h4 class="inline-header">Songs:</h4>
                       <div class="list-group-item" ng-repeat="song in albumsShowCtrl.album.songs">
+                        <button class='btn btn-danger' ng-click="albumsShowCtrl.deleteSong(song)">Delete</button>
+                        <button class='btn btn-info' ng-hide="editing" ng-click="editing = true">Edit</button>
+                        <button class='btn btn-success' ng-show="editing" ng-click="albumsShowCtrl.editSong(song); editing = false">Save Changes</button>
                         ({{song.trackNumber}}){{song.name}}
                       </div>
                     </li>
                   </ul>
+
+                  <form class="form-horizontal" ng-submit="albumsShowCtrl.createSong()">
+                    <fieldset>
+
+                  <!-- Form Name -->
+                  <legend>Add New Song</legend>
+
+                  <!-- Text input-->
+                  <div class="form-group">
+                    <label class="col-md-4 control-label">Track number</label>
+                    <div class="col-md-4">
+                    <input id="name" ng-model="albumsShowCtrl.newSong.trackNumber" type="text" class="form-control input-md" required="">
+                    </div>
+                  </div>
+
+                  <!-- Text input-->
+                  <div class="form-group">
+                    <label class="col-md-4 control-label">Track Name</label>
+                    <div class="col-md-4">
+                    <input ng-model="albumsShowCtrl.newSong.name" type="text" class="form-control input-md">
+                    </div>
+                  </div>
+
+
+                  <!-- Button -->
+                  <div class="form-group">
+                      <div class="col-md-4">
+                        <button class="btn btn-primary">Submit</button>
+                      </div>
+                  </div>
+
+                </fieldset>
+              </form>
                 </div>
               </div>
             </div>
