@@ -17,10 +17,11 @@ function AlbumsShowController ($http, $routeParams) {
     console.log('There was an error getting the data', response);
   });
 
+
   vm.createSong = function () {
     $http({
       method: 'POST',
-      url: '/api/albums',
+      url: '/api/albums/'+$routeParams.id +'/songs',
       data: vm.newSong,
     }).then(function successCallback(response) {
       vm.album.songs.push(response.data);
@@ -29,7 +30,7 @@ function AlbumsShowController ($http, $routeParams) {
     });
   }
 
-  vm.editAlbum = function (album) {
+  vm.editSong = function (song) {
     $http({
       method: 'PUT',
       url: '/api/albums/'+album._id,
@@ -41,13 +42,13 @@ function AlbumsShowController ($http, $routeParams) {
     });
   }
 
-  vm.deleteAlbum = function (album) {
+  vm.deleteSong = function (song) {
     $http({
       method: 'DELETE',
-      url: '/api/albums/'+ album._id
+      url: '/api/albums/'+$routeParams.id +'/songs/' + song._id,
     }).then(function successCallback(json) {
-      var index = vm.albums.indexOf(album);
-      vm.albums.splice(index,1)
+      var index = vm.albums.songs.indexOf(song);
+      vm.albums.songs.splice(index,1)
     }, function errorCallback(response) {
       console.log('There was an error deleting the data', response);
     });
